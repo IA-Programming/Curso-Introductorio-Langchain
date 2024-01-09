@@ -1,0 +1,8 @@
+bs4
+langchain
+langchain_openai
+openai
+pypdf
+streamlit
+tiktoken
+numexpr
