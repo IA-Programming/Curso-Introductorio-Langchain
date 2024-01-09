@@ -1,0 +1,41 @@
+# Cache
+__pycache__/
+__pycache__
+
+# Environment
+*.env
+*.env*.local
+
+# Python virtual environment
+pip-selfcheck.json
+env
+myenv
+venv
+.venv
+
+# VS Code settings
+.vscode/
+.github_access_token
+
+# Streamlit Secrets
+.streamlit/secrets.toml
+
+#Chroma
+chroma_db_*/
+chroma_db_*
+
+
+# Trulens
+default.sqlite
+litellm_uuid.txt
+
+# Vercel
+.vercel
+vercel.json
+.vercelignore
+data
+tests
+
+# directory folder
+test
+keys.json
