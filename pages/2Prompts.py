@@ -4,14 +4,16 @@ from langchain.prompts import ChatPromptTemplate, PromptTemplate
 
 st.set_page_config(page_title="Aprendiendo LangChain | Prompts", page_icon="📝")
 
-from st_components.st_init import password
+from st_components.st_init import password, markdownsettings
 
 st.header('📝  Prompts')
 
 if 'OPENAI_API_KEY' not in st.session_state:
+    markdownsettings()
     password()
     
 else:
+    markdownsettings()
     st.success('Exitosamente colocado tu api key', icon='🎉')
 
 st.write('''
@@ -55,7 +57,7 @@ with st.form("prompt_template_text_generator"):
 
     about = st.text_input("Chiste acerca: ", placeholder="pollos, fashion, ...")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
     if execute and 'OPENAI_API_KEY' in st.session_state:
         
@@ -112,7 +114,7 @@ with st.form("prompt_template"):
 
     business_type = st.text_input("Tipo de negocio", placeholder="fruit shop, fashion atelier, ...")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
     if execute  and 'OPENAI_API_KEY' in st.session_state:
 

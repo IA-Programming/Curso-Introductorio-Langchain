@@ -3,14 +3,16 @@ from langchain_openai import OpenAI, ChatOpenAI
 
 st.set_page_config(page_title="Aprendiendo LangChain ! Grandes Modelos de Languaje", page_icon="🤖")
 
-from st_components.st_init import password
+from st_components.st_init import password, markdownsettings
 
 st.header('🤖 Grandes Modelos de Languaje (LLMs)')
 
 if 'OPENAI_API_KEY' not in st.session_state:
+    markdownsettings()
     password()
     
 else:
+    markdownsettings()
     st.success('Exitosamente colocado tu api key', icon='🎉')
 
 st.write('''
@@ -35,9 +37,9 @@ print(response)
 
 with st.form("openai_llm"):
 
-    prompt = st.text_input("Prompt", placeholder="What is 2+2?")
+    prompt = st.text_input("Prompt", placeholder="Cuanto es 2+2?")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
     if execute and prompt and 'OPENAI_API_KEY' in st.session_state:
 
@@ -67,9 +69,9 @@ print(response.content)
 
 with st.form("ChatOpenai_llm"):
 
-    prompt = st.text_input("Prompt", placeholder="What is 2+2?")
+    prompt = st.text_input("Prompt", placeholder="Cuanto es 2+2?")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
     if execute and 'OPENAI_API_KEY' in st.session_state:
 

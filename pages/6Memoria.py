@@ -41,7 +41,7 @@ from langchain.memory import ConversationBufferMemory
 
 llm = ChatOpenAI(api_key=os.getenv('OPENAI_API_KEY'), temperature=0.0)
 
-# 2 is the number of messages stored in the memory
+# 2 es el numero de mensajes almacenados en la memoria
 memory = ConversationBufferWindowMemory(k=2)
         
 chain = ConversationChain(llm=llm, memory=memory)
@@ -61,7 +61,7 @@ from langchain.memory import ConversationTokenBufferMemory
 
 llm = ChatOpenAI(api_key=os.getenv('OPENAI_API_KEY'), temperature=0.0)
 
-# limit to 50 tokens
+# limitamos a 50 tokens
 memory = ConversationTokenBufferMemory(llm=llm, max_token_limit=50)
 ''')
 
@@ -77,7 +77,7 @@ from langchain.memory import ConversationSummaryMemory
 
 llm = ChatOpenAI(api_key=os.getenv('OPENAI_API_KEY'), temperature=0.0)
 
-# limit to 100 tokens and store a summary
+# limitado a 100 tokens and almacenado un resumen
 memory = ConversationSummaryMemory(llm=llm, max_token_limit=100)
 ''')
 

@@ -37,8 +37,8 @@ st.subheader('Para aprender mejor')
 st.write('''
 Para disfrutar mejor de este curso de LangChain, deberías tener un conocimiento básico de los fundamentos del desarrollo de software, y idealmente algo de experiencia con Python. Si no es así, puedes consultar estos recursos de FreeCodeCamp para mejorar tus habilidades y luego regresar.
 
-- [Learn Python](https://www.youtube.com/watch?v=nKPbfIU442g)
-- [Intro to Programming](https://www.youtube.com/watch?v=oHHsLTV7l3E)
+- [Aprende Python](https://www.youtube.com/watch?v=nKPbfIU442g)
+- [Introduccion a programacion](https://www.youtube.com/watch?v=oHHsLTV7l3E)
 ''')
 
 st.subheader('Creditos')

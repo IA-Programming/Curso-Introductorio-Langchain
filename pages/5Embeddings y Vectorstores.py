@@ -1,4 +1,3 @@
-import openai
 import streamlit as st
 from langchain_openai import OpenAIEmbeddings
 
@@ -6,12 +5,14 @@ st.set_page_config(page_title="Aprendiendo LangChain | Embeddings and Vector Sto
 
 st.header('📈 Embeddings and Vector Stores')
 
-from st_components.st_init import password
+from st_components.st_init import password, markdownsettings
 
 if 'OPENAI_API_KEY' not in st.session_state:
+    markdownsettings()
     password()
     
 else:
+    markdownsettings()
     st.success('Exitosamente colocado tu api key', icon='🎉')
 
 st.write('''
@@ -31,17 +32,19 @@ response = embeddings_model.embed_query(text)
 
 with st.form("embedding"):
 
-    text = st.text_input("Insert some text to be converted into an embedding")
+    text = st.text_input("Insertar texto a ser convertido en embedding")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
-    if execute:
+    if execute and text and 'OPENAI_API_KEY' in st.session_state:
 
         embeddings_model = OpenAIEmbeddings(api_key=st.session_state.get('OPENAI_API_KEY'))
 
         response = embeddings_model.embed_query(text)
 
         st.json(response)
+    elif execute and 'OPENAI_API_KEY' not in st.session_state:
+        st.warning('⚠️ Necesitas colocar tu OpenAI Apikey arriba en el principio de la pagina')
 
 st.write('''
 En el ejemplo anterior, convertimos una sola pieza de texto en un embedding, pero recuerda que los LLM pueden interactuar con casi cualquier tipo de contenido, siempre y cuando podamos convertirlo en un embedding. Podemos trabajar con imágenes, videos, PDFs e incluso con formatos propietarios de terceros.

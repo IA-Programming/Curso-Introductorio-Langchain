@@ -1,11 +1,7 @@
 import os
-import openai
 import tempfile
 import streamlit as st
-from langchain.text_splitter import Language
-from langchain.document_loaders import CSVLoader
 from langchain.document_loaders import TextLoader
-from langchain.document_loaders import PyPDFLoader
 from langchain.document_loaders import WebBaseLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -13,6 +9,10 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 st.set_page_config(page_title="Aprendiendo LangChain | Document Loaders and Text Splitters", page_icon="✂️")
 
 st.header('✂️ Cargadores de documentos y Splitters de Texto')
+
+from st_components.st_init import markdownsettings
+
+markdownsettings()
 
 st.write('''
 Uno de los conceptos más revolucionarios en el mundo de la inteligencia artificial es tener LLM interactuando con nuestros datos de propios. LangChain proporciona clases y métodos convenientes para cargar varios tipos de documentos y transformarlos para adaptarse a las necesidades de nuestra aplicación.
@@ -27,7 +27,7 @@ Para manejar diferentes tipos de documentos de manera sencilla, LangChain propor
 st.code('''
 from langchain_community.document_loaders import TextLoader
 
-# load the document and split it into chunks
+# Cargando el documento para partir luego
 loader = TextLoader("../../modules/state_of_the_union.txt")
 documents = loader.load()
 ''')
@@ -85,7 +85,7 @@ st.subheader('CharacterTextSplitter')
 st.code('''
 from langchain.text_splitter import CharacterTextSplitter
 
-# the chunk size/overlap are deliberately low for demo purposes
+# el tamaño/superposición del chunk son deliveradamente bajos con fines de demostración.
 text_splitter = CharacterTextSplitter(
     separator = ' ',
     chunk_size=50,
@@ -93,15 +93,15 @@ text_splitter = CharacterTextSplitter(
     length_function=len,
 )
 
-# simply split the text
+# simplemente partimos el texto
 splits = text_splitter.split_text(text)
 ''')
 
 with st.form("char_textsplitter"):
 
-    text = st.text_area("Insert some text")
+    text = st.text_area("Inserta algun texto")
 
-    execute = st.form_submit_button("✂️ Split")
+    execute = st.form_submit_button("✂️ Dividir")
 
     if execute:
 
@@ -115,6 +115,8 @@ with st.form("char_textsplitter"):
         splits = text_splitter.split_text(text)
 
         st.write(splits)
+    elif execute and not text:
+        st.warning('⚠️ Necesitas colocar Texto en el campo de texto')
 
 st.subheader('RecursiveCharacterTextSplitter')
 
@@ -125,7 +127,7 @@ RecursiveCharacterTextSplitter es la forma recomendada de dividir texto no estru
 st.code('''
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-# the chunk size/overlap are deliberately low for demo purposes
+# el tamaño/superposición del chunk son deliveradamente bajos con fines de demostración.
 text_splitter = RecursiveCharacterTextSplitter(
     separators=["\\n\\n", "\\n", " ", ""],
     chunk_size=100,
@@ -133,15 +135,15 @@ text_splitter = RecursiveCharacterTextSplitter(
     length_function=len,
 )
 
-# create documents back from text chunks, as LangChain default format
+# Crea documentos a partir de chunks de texto, como formato predeterminado de LangChain.
 docs = text_splitter.create_documents([text])
 ''')
 
 with st.form("recursive_textsplitter"):
 
-    text = st.text_area("Insert some text")
+    text = st.text_area("Inserta texto")
 
-    execute = st.form_submit_button("✂️ Split")
+    execute = st.form_submit_button("✂️ Dividir")
 
     if execute:
 
@@ -155,6 +157,8 @@ with st.form("recursive_textsplitter"):
         docs = text_splitter.create_documents([text])
 
         st.write(docs)
+    elif execute and not text:
+        st.warning('⚠️ Necesitas colocar Texto en el campo de texto')
 
 st.subheader('Load and Split')
 
@@ -172,17 +176,19 @@ docs = web_loader.load_and_split()
 
 with st.form("load_and_split"):
 
-    url = st.text_input("Insert an URL to load", placeholder="https://francescocarlucci.com/blog/thoughts-on-artificial-intelligence")
+    url = st.text_input("Inserta un link para cargar", placeholder="https://francescocarlucci.com/blog/thoughts-on-artificial-intelligence")
 
-    execute = st.form_submit_button("✂️ Load and Split")
+    execute = st.form_submit_button("✂️ Cargar y Dividir")
 
-    if execute:
+    if execute and url:
 
         web_loader = WebBaseLoader(url)
 
         docs = web_loader.load_and_split()
 
         st.write(docs)
+    elif execute and not url:
+        st.warning('⚠️ Necesitas colocar un Url en el campo de texto')
 
 st.divider()
 

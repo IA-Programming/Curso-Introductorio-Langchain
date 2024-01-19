@@ -1,12 +1,15 @@
 import streamlit as st
 from openai import OpenAI
 
-def password():
+def markdownsettings():
     st.markdown('<style>\
-                .css-w770g5{width: 100%;}\
-                .css-b3z5c9{width: 100%;}\
-                .stButton>button{width: 100%;}\
-                </style>', unsafe_allow_html=True)
+            .css-w770g5{width: 100%;}\
+            .css-b3z5c9{width: 100%;}\
+            .stButton>button{width: 100%;}\
+            </style>', unsafe_allow_html=True)
+
+def password():
+
     with st.expander("ℹ️ Coloca aqui tu OpenAI API"):
         st.warning("⚠️ Necesitas colocar tu OpenAI Apikey. puedes conseguirlo [aqui](https://platform.openai.com/account/api-keys).")
         st.subheader('OpenAI API Key')

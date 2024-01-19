@@ -5,15 +5,17 @@ from langchain.prompts import ChatPromptTemplate
 
 st.set_page_config(page_title="Aprendiendo LangChain | Cadenas",page_icon="🔗")
 
-from st_components.st_init import password
+from st_components.st_init import password, markdownsettings
 
 st.header('🔗 Cadenas')
 
 if 'OPENAI_API_KEY' not in st.session_state:
-    password()
+	markdownsettings()
+	password()
     
 else:
-    st.success('Exitosamente colocado tu api key', icon='🎉')
+	markdownsettings()
+	st.success('Exitosamente colocado tu api key', icon='🎉')
 
 st.write('''
 Ahora que tenemos una buena comprensión de los LLMs y las Plantillas de Prompts, estamos listos para presentar las cadenas, el componente central más importante de LangChain. Las cadenas son clases preconstruidas que nos permiten combinar LLMs e Indicaciones juntos, con un enfoque modular diseñado para facilitar la creación de flujos de procesamiento de lenguaje complejas mientras mantenemos nuestra base de código sólida y legible.
@@ -21,7 +23,7 @@ Ahora que tenemos una buena comprensión de los LLMs y las Plantillas de Prompts
 LangChain proporciona cadenas para las operaciones más comunes (enrutamiento, ejecución secuencial, análisis de documentos), así como cadenas avanzadas para trabajar con datos personalizados, manejar la memoria y más. También veremos características más avanzadas de LangChain (tokenizadores, transformadores, incrustaciones) que son mucho más fáciles de usar con cadenas.
 ''')
 
-st.subheader('Our first basic Chain')
+st.subheader('Nuestra primera Cadena')
 
 st.code('''
 llm = ChatOpenAI(api_key=openai_key, temperature=0.9)
@@ -39,9 +41,9 @@ response = chain.run(movie)
 
 with st.form("basic_chain"):
 
-    movie = st.text_input("Movie", placeholder="The Green Mile")
+    movie = st.text_input("Pelicula", placeholder="La milla verde")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
 with st.spinner('Processing your request...'):
 	if execute and 'OPENAI_API_KEY' in st.session_state:
@@ -68,7 +70,7 @@ st.write('''
 Esta Cadena básica no es muy diferente del enfoque de la Plantilla de Prompts, pero avancemos hacia un ejemplo donde podamos ver las ventajas y la simplicidad que nos brindan las cadenas.
 ''')
 
-st.subheader('LlmMath tool')
+st.subheader('Cadena LlmMath para matematicas')
 
 st.write('La herramienta LLMmath es una poderosa herramienta que te permite realizar cálculos matemáticos utilizando la biblioteca numexpr de Python. Puede traducir problemas matemáticos en expresiones que pueden ser ejecutadas y proporcionar la salida de la ejecución del código')
 
@@ -77,9 +79,9 @@ from langchain.chains import LLMMathChain
 from langchain_openai import OpenAI
 
 llm = OpenAI(model="gpt-3.5-turbo-instruct", api_key=os.getenv("OPENAI_API_KEY"), temperature=0.5)
-llmmath_tool = LLMMathTool(llm)
-		
-question = "37593 * 67"
+llmmath_tool = LLMMathChain.from_llm(llm=llm)
+
+question = "cuanto es el valor de 37593 * 67"
 output = llmmath_tool.run(question)
 print(output)
 ''')
@@ -92,7 +94,7 @@ with st.form("Math_tool	"):
 
     question = st.text_input("Ejercicio matematico a calcular", placeholder="Cuanto es 37593 * 67?")
 
-    execute = st.form_submit_button("🚀 Execute")
+    execute = st.form_submit_button("🚀 Ejecutar")
 
 with st.spinner('Processing your request...'):
 	if execute and 'OPENAI_API_KEY' in st.session_state:
