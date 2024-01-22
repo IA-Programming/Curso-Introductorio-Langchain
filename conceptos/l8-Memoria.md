@@ -22,7 +22,7 @@ Estos elementos de memoria son utilizados en Langchain para almacenar y acceder 
 
 ## Ejemplos:
 
-Consulta el [notebook](l8-memory.ipynb) para ver más ejemplos de código.
+Consulta el [notebook](./lab/l8-memoria.ipynb) para ver más ejemplos de código.
 
 ## Referencias
 
